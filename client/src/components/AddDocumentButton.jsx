@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCirclePlus, faHouseChimney, faMapMarker, faPlus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Map.module.css';
-import styl from './addDocumentButton.module.css';
+import addDocumentButtonStyles  from './addDocumentButton.module.css';
 import { SelectionState } from './SelectionState';
 import CloseModeSelectionButton from './CloseModeSelectionButton';
 import PropTypes from 'prop-types';
@@ -134,39 +134,39 @@ const noXButton =
             {loggedIn && !isResident &&(
                 <div
                     className={`
-                ${styl.background} 
+                ${addDocumentButtonStyles.background} 
                 ${isAddingDocument == SelectionState.IS_CHOOSING_THE_MODE ||
                             isAddingDocument == SelectionState.NEW_POINT  ||
                             isAddingDocument == SelectionState.NEW_AREA
-                            ? styl.expanded : ''}`}
+                            ? addDocumentButtonStyles.expanded : ''}`}
                 >
                     {/* Render selection mode options when choosing how to add a document */}
                     {isAddingDocument == SelectionState.IS_CHOOSING_THE_MODE && (
-                        <div className={styl.verticalAlignment}>
-                            <div style={{ height: '55px' }}>
+                        <div className={addDocumentButtonStyles.verticalAlignment}>
+                            <div addDocumentButtonStyles={{ height: '55px' }}>
                                 <p>New Point {" "}
-                                    <button className={styl.buttonLink} onClick={handleChooseNewPoint}>
+                                    <button className={addDocumentButtonStyles.buttonLink} onClick={handleChooseNewPoint}>
                                         <FontAwesomeIcon icon={faCirclePlus} />
                                     </button>
                                 </p>
                             </div>
                             <div style={{ height: '55px' }}>
                                 <p>New Area {" "}
-                                    <button className={styl.buttonLink} onClick={handleCreateNewArea}>
+                                    <button className={addDocumentButtonStyles.buttonLink} onClick={handleCreateNewArea}>
                                         <FontAwesomeIcon icon={faSquarePlus} />
                                     </button>
                                 </p>
                             </div>
                             <div style={{ height: '55px' }}>
                                 <p>Municipality {" "}
-                                    <button className={styl.buttonLink} onClick={handleAssignToMunicipalArea}>
+                                    <button className={addDocumentButtonStyles.buttonLink} onClick={handleAssignToMunicipalArea}>
                                         <FontAwesomeIcon icon={faHouseChimney} />
                                     </button>
                                 </p>
                             </div>
                             <div style={{ height: '55px' }}>
                                 <p>Existing Point {" "}
-                                    <button className={styl.buttonLink} onClick={handleSelectExistingPoint}>
+                                    <button className={addDocumentButtonStyles.buttonLink} onClick={handleSelectExistingPoint}>
                                         <FontAwesomeIcon icon={faMapMarker} />
                                     </button>
                                 </p>
@@ -185,10 +185,10 @@ const noXButton =
                         </div>
                     )}
                     {isAddingDocument == SelectionState.NEW_AREA && (
-                            <div className={styl.verticalAlignment}>
+                            <div className={addDocumentButtonStyles.verticalAlignment}>
                                 <div style={{ height: '55px' }}>
                                     <p>Confirm area {" "}
-                                        <button className={styl.buttonLink} onClick={handleConfirmNewArea}>
+                                        <button className={addDocumentButtonStyles.buttonLink} onClick={handleConfirmNewArea}>
                                             <FontAwesomeIcon icon={faCheck} />
                                         </button>
                                     </p>
@@ -224,7 +224,7 @@ const noXButton =
                     {isAddingDocument != SelectionState.NOT_IN_PROGRESS &&
                         noXButton ? (
                             <button
-                                className={styl.buttonLink}
+                                className={addDocumentButtonStyles.buttonLink}
                                 onClick={() => {
                                     setIsAddingDocument(SelectionState.NOT_IN_PROGRESS);
                                     setToggleDrawing(false);
