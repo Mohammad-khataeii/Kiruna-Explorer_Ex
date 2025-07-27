@@ -1,4 +1,4 @@
-const SERVER_BASE_URL = 'http://localhost:5001';
+const SERVER_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const USERS_API_BASE_URL = `${SERVER_BASE_URL}/users`; 
 const DOCUMENTS_API_BASE_URL = `${SERVER_BASE_URL}/documents`;
 const AREAS_API_BASE_URL = `${SERVER_BASE_URL}/areas`; 
