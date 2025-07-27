@@ -14,7 +14,7 @@ import ScrollableDocumentsList from './ListDocument';
 import SearchBar from './SearchBar';
 import DrawingMap from './DrawingMap';
 import { MdSatelliteAlt } from "react-icons/md";            //satellite icon for button
-import AddDocumentButton from './AddDocumentButton';
+import AddDocumentButton from './addDocumentButton';
 import SelectDocumentsButton from './SelectDocumentsButton';
 import Municipality from './Municipality';
 import API from '../services/api';
