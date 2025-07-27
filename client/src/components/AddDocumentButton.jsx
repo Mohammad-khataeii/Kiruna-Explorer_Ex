@@ -5,7 +5,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCirclePlus, faHouseChimney, faMapMarker, faPlus, faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import styles from './Map.module.css';
-import addDocumentButtonStyles  from './AddDocumentButton.module.css';
+import styl  from './AddDocumentButton.module.css';
 import { SelectionState } from './SelectionState';
 import CloseModeSelectionButton from './CloseModeSelectionButton';
 import PropTypes from 'prop-types';
