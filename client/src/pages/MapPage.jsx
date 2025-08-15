@@ -7,14 +7,15 @@ import styles from './MapPage.module.css';
 import { DocumentContext } from '../contexts/DocumentContext';
 
 function MapPage() {
-    const [diagramHeight, setDiagramHeight] = useState(300); // Initial height of the diagram
-    const { visualizeDiagram } = useContext(DocumentContext);
-    const [dragging, setDragging] = useState(false); // State to track the dragging motion
-    const containerRef = useRef(null); // Reference for the main container
-    const maxHeight = window.innerHeight * 0.91;
-    const minHeight = 0;
+    const { visualizeDiagram } = useContext(DocumentContext); // Must be true for diagram to show
     const { setIsMapHigh } = useMapLayoutContext();
 
+    const containerRef = useRef(null);
+    const maxHeight = window.innerHeight * 0.91;
+    const minHeight = 0;
+
+    const [diagramHeight, setDiagramHeight] = useState(300); // ✅ Default to visible, not full
+    const [dragging, setDragging] = useState(false);
 
     const startDrag = (e) => {
         setDragging(true);
@@ -30,20 +31,17 @@ function MapPage() {
 
             if (newHeight > 0 && newHeight < maxHeight) {
                 setDiagramHeight(newHeight);
-
-                setIsMapHigh(newHeight < 250); 
+                setIsMapHigh(newHeight < 250);
             }
         }
     };
 
-    // Close with one click
     const handleClick = () => {
-        setDiagramHeight(minHeight);
+        setDiagramHeight(minHeight); // Collapse
     };
 
-    // Open with double click
     const handleDoubleClick = () => {
-        setDiagramHeight(maxHeight);
+        setDiagramHeight(maxHeight); // Expand
     };
 
     return (
@@ -60,32 +58,31 @@ function MapPage() {
                 <MapComponent />
             </div>
 
-
-            { visualizeDiagram &&
-            <div className="diagramComponents">
-                {/* Resize bar to adjust diagram size */}
-                <div
-                    className={styles.resizeBar}
-                    onMouseDown={startDrag}  // Start dragging when the resize bar is clicked
-                    onClick={handleClick}  // Close the diagram
-                    onDoubleClick={handleDoubleClick}  // Open the diagram
-                    tabIndex="0"
-                    role="button"
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                        handleClick();  // Trigger click on Enter or Space
-                        } else if (e.key === 'ArrowUp') {
-                        handleDoubleClick();  // Trigger double-click with ArrowUp
-                        }
-                    }}
+            {visualizeDiagram && (
+                <div className="diagramComponents">
+                    <div
+                        className={styles.resizeBar}
+                        onMouseDown={startDrag}
+                        onClick={handleClick}
+                        onDoubleClick={handleDoubleClick}
+                        tabIndex="0"
+                        role="button"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                handleClick();
+                            } else if (e.key === 'ArrowUp') {
+                                handleDoubleClick();
+                            }
+                        }}
                     >
-                    <FaArrowsAltV className={styles.resizeIcon} /> {/* Icon indicating draggable area */}
-                </div>
+                        <FaArrowsAltV className={styles.resizeIcon} />
+                    </div>
 
-                <div className={styles.diagramContainer} style={{ height: diagramHeight }}>
-                    <Diagram />
+                    <div className={styles.diagramContainer} style={{ height: diagramHeight }}>
+                        <Diagram />
+                    </div>
                 </div>
-            </div>}
+            )}
         </div>
     );
 }

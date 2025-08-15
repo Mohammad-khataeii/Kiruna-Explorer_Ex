@@ -14,7 +14,7 @@ export const DocumentProvider = ({ children }) => {
   const [displayedAreas, setDisplayedAreas] = useState([]); // all the list of documents of each area displayed in the Map
   const [municipalArea, setMunicipalArea] = useState(true); // set if municipality will be shown
   const [selectedMarker, setSelectedMarker] = useState(null); // selected marker
-  const [visualizeDiagram, setVisualizeDiagram] = useState(false); // set if the diagram will be shown
+  const [visualizeDiagram, setVisualizeDiagram] = useState(true); // set if the diagram will be shown
   const [highlightedNode, setHighlightedNode] = useState(null); //highlighted node
   const [position, setPosition] = useState([68.1, 20.4]); // Kiruna coordinates
   const [selectedDocs, setSelectedDocs] = useState([]); // selected documents
