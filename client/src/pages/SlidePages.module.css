@@ -22,3 +22,17 @@
   /* Allow full width so lines are long */
   max-width: 100%;
 }
+
+.exploreLink {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: clamp(36px, 6vw, 72px);
+  color: #111;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.exploreLink:hover {
+  color: #333;
+}

@@ -6,10 +6,11 @@ function Slide3() {
   return (
     <div className={styles.slidePage}>
       <h1 className={styles.headline}>
-        A digital tool to narrate{" "}
-        the urban transformation{" "}
-        of the European Capital{" "}
-        of Culture 2029
+        You are navigating a beta{" "}
+        version developed at{" "}
+        Politecnico di Torino in{" "}
+        collaboration with the{" "}
+        City of Kiruna
       </h1>
     </div>
   );
