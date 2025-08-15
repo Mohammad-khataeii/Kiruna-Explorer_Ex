@@ -1,43 +1,24 @@
 .slidePage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 91vh;
-  background: transparent;
-  color: #ffffff;
-  padding: 2rem;
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-.slideCard {
-  padding: 2rem;
   width: 100%;
-  max-width: 700px;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  animation: fadeIn 1.5s ease-in-out;
+  display: flex;
+  align-items: center;        /* vertical center */
+  justify-content: flex-start;/* start at left */
+  background: linear-gradient(180deg, #f7dbe6 0%, #c9b7e6 100%);
+  padding-left: clamp(16px, 8vw, 120px); /* consistent left margin */
+  padding-right: clamp(16px, 8vw, 120px);
 }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #232229;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-}
+.headline {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;          /* bold like in screenshots */
+  color: #111;
+  text-align: left;
 
-.content {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #535157;
-  font-family: 'Roboto', sans-serif;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  white-space: pre-line;
-}
+  /* Big size to fill the screen height */
+  font-size: clamp(42px, 7vw, 96px);
+  line-height: 1.2;
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  /* Allow full width so lines are long */
+  max-width: 100%;
 }

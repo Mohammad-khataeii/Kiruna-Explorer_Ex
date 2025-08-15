@@ -12,13 +12,13 @@ function SlideShow() {
 
   useEffect(() => {
     if (index >= slides.length) {
-      navigate('/landing'); // ✅ go to landing page
+      navigate('/map'); // ✅ go to landing page
       return;
     }
 
     const timer = setTimeout(() => {
       setIndex((prev) => prev + 1);
-    }, 7000); // 7s per slide
+    }, 5000); // 7s per slide
 
     return () => clearTimeout(timer);
   }, [index, navigate]);
