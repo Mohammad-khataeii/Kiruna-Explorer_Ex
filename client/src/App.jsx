@@ -25,7 +25,7 @@ function InactivityHandler({ children }) {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       navigate('/'); // redirect to slide show ("/") after inactivity
-    }, 7000); // 10 seconds
+    }, 7000); // 7 seconds
   };
 
   useEffect(() => {

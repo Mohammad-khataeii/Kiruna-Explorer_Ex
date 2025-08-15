@@ -9,8 +9,8 @@ import styles from './LoginForm.module.css';
 function LoginForm() {
   const { handleLogin } = useContext(AuthContext);
 
-  const [email, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setUsername] = useState('admin@admin.com');
+  const [password, setPassword] = useState('123456');
   
   const handleSubmit = (event) => {
       event.preventDefault();

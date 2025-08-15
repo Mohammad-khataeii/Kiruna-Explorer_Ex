@@ -4,7 +4,7 @@ import styles from './LoginPage.module.css';
 import LoginForm from '../components/LoginForm';
 
 function LoginPage() {
-  const [role, setRole] = useState('Resident'); 
+  const [role, setRole] = useState('Urban Planner'); 
 
   
   const handleRoleChange = (e) => {
