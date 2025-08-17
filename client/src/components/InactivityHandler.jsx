@@ -1,40 +1,47 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";  // ✅ check login state
 import styles from "./InactivityHandler.module.css";
 
 function InactivityHandler({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { loggedIn } = useContext(AuthContext);
 
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [showInactivityPrompt, setShowInactivityPrompt] = useState(false);
-  const [countdown, setCountdown] = useState(10); // inactivity countdown
+  const [countdown, setCountdown] = useState(10);
+
   const countdownRef = useRef(null);
   const inactivityTimerRef = useRef(null);
+  const redirectTimerRef = useRef(null);
 
-  // Show login prompt 7s after reaching /map ---
+  
   useEffect(() => {
-    if (location.pathname === "/map") {
+    if (!loggedIn && location.pathname === "/map") {
       const loginTimer = setTimeout(() => {
         setShowLoginPrompt(true);
       }, 7000); // 7s delay for login prompt
+
       return () => clearTimeout(loginTimer);
     }
-  }, [location.pathname]);
+  }, [location.pathname, loggedIn]);
 
-  // Handle login answer ---
+  // Handle login answers ---
   const handleLoginYes = () => {
-  setShowLoginPrompt(false);
-  navigate("/login");   
-};
-
+    setShowLoginPrompt(false);
+    navigate("/login"); 
+  };
 
   const handleLoginNo = () => {
     setShowLoginPrompt(false);
 
-    // After 10s of login prompt dismissed → show inactivity
+    // After 10s → show inactivity modal
     inactivityTimerRef.current = setTimeout(() => {
       setShowInactivityPrompt(true);
+
+      // reset countdown
+      setCountdown(10);
 
       // start countdown
       countdownRef.current = setInterval(() => {
@@ -42,20 +49,32 @@ function InactivityHandler({ children }) {
       }, 1000);
 
       // auto redirect after countdown
-      setTimeout(() => {
+      redirectTimerRef.current = setTimeout(() => {
+        setShowInactivityPrompt(false); 
+        if (countdownRef.current) clearInterval(countdownRef.current);
         navigate("/");
       }, 10000);
     }, 10000);
   };
 
-  // --- Step 3: Handle inactivity stay ---
+  // --- Step 3: Handle inactivity "Stay" ---
   const handleStay = () => {
     setShowInactivityPrompt(false);
     setCountdown(10);
 
     if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     if (countdownRef.current) clearInterval(countdownRef.current);
+    if (redirectTimerRef.current) clearTimeout(redirectTimerRef.current);
   };
+
+  // --- Cleanup timers on unmount ---
+  useEffect(() => {
+    return () => {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+      if (countdownRef.current) clearInterval(countdownRef.current);
+      if (redirectTimerRef.current) clearTimeout(redirectTimerRef.current);
+    };
+  }, []);
 
   return (
     <>
