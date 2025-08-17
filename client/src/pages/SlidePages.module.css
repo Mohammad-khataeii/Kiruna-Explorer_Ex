@@ -1,15 +1,15 @@
-
 .slidePage {
-  height: 91vh;
+  height: 100vh;
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-start;   /* align content to the left */
   background: linear-gradient(180deg, #f7dbe6 0%, #c9b7e6 100%);
-  padding-left: clamp(16px, 8vw, 120px);
-  padding-right: clamp(16px, 8vw, 120px);
+  padding-left: clamp(16px, 4vw, 60px);  /* smaller, consistent padding */
+  padding-right: clamp(16px, 4vw, 60px);
   position: relative;
   overflow: hidden;
+  text-align: left; /* make all text start from the left */
 }
 
 .fadeText {
@@ -27,21 +27,31 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   color: #111;
-  text-align: left;
-  font-size: clamp(42px, 7vw, 96px);
+  text-align: left;  /* ensure heading aligns left */
+
+  /* Responsive font size */
+  font-size: clamp(32px, 6vw, 80px);
   line-height: 1.2;
+
+  /* Don’t auto-center with margins */
+  margin: 0;
   max-width: 100%;
+
+  /* Break long words if needed */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .exploreLink {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: clamp(36px, 6vw, 72px);
+  font-size: clamp(24px, 4vw, 48px);
   color: #111;
   text-decoration: underline;
   cursor: pointer;
   margin-top: 2rem;
   transition: color 0.3s ease;
+  text-align: left; /* align link text left under headline */
 }
 
 .exploreLink:hover {

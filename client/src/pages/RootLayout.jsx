@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavHeader from "../components/NavHeader";
@@ -8,6 +8,7 @@ import styles from './RootLayout.module.css';
 
 function RootLayout() {
     const { message, setMessage } = useContext(AuthContext);
+    const location = useLocation();
 
     useEffect(() => {
         if (message) {
@@ -19,9 +20,12 @@ function RootLayout() {
         }
     }, [message, setMessage]);
 
+    // Hide NavHeader only on slideshow (/)
+    const hideNavbar = location.pathname === "/";
+
     return (
         <main className={styles.wrap}>
-            <NavHeader />
+            {!hideNavbar && <NavHeader />}
             <Outlet />
         </main>
     );
