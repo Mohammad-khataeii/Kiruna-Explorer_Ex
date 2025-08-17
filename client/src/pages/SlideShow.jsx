@@ -4,10 +4,9 @@ import Slide1 from './Slide1';
 import Slide2 from './Slide2';
 import Slide3 from './Slide3';
 import Slide4 from './Slide4';
+import styles from './SlidePages.module.css';
 
 const SLIDE_DURATION = 5000; // ms per slide
-
-// Store component types, not JSX elements
 const slides = [Slide1, Slide2, Slide3, Slide4];
 
 function SlideShow() {
@@ -15,7 +14,7 @@ function SlideShow() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (index >= slides.length) return; // safety guard
+    if (index >= slides.length) return;
 
     const timer = setTimeout(() => {
       if (index < slides.length - 1) {
@@ -28,10 +27,16 @@ function SlideShow() {
     return () => clearTimeout(timer);
   }, [index, navigate]);
 
-  if (index >= slides.length) return null; // avoid out-of-bounds render
-
   const CurrentSlide = slides[index];
-  return <CurrentSlide />;
+
+  return (
+    <div className={styles.slidePage}>
+      
+      <div key={index} className={styles.fadeText}>
+        <CurrentSlide />
+      </div>
+    </div>
+  );
 }
 
 export default SlideShow;
