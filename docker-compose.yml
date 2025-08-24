@@ -1,31 +1,37 @@
 version: '3.8'
 
 services:
+  mongo:
+    build:
+      context: ./server/mongo        
+    
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   backend:
     build:
-      context: ./server
+      context: ./server       
+    container_name: kiruna_backend
     ports:
       - "5001:5001"
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/kiruna
+      - MONGO_URI=mongodb://mongo:27017/kiruna   # service name 'mongo'
     depends_on:
       - mongo
 
   frontend:
     build:
       context: ./client
-      dockerfile: Dockerfile  
+    container_name: kiruna_frontend
     ports:
-      - "3000:80" # Frontend runs on port 80 inside the container, mapped to 3000
-
-  mongo:
-    image: mongo:6.0
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+      - "3000:80"
+    environment:
+      - VITE_API_BASE_URL=http://backend:5001   # 👈 runtime backend URL
+    depends_on:
+      - backend
 
 volumes:
   mongo_data:

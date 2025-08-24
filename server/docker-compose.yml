@@ -1,14 +1,23 @@
 version: '3.8'
 
 services:
+  mongo:
+    build:
+      context: ./mongo        
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   backend:
     build:
-      context: ./server
+      context: ./server       
     ports:
       - "5001:5001"
     environment:
       - NODE_ENV=development
-      - MONGO_URI=mongodb://mongo:27017/your_database_name
+      - MONGO_URI=mongodb://mongo:27017/kiruna
     depends_on:
       - mongo
 
@@ -16,15 +25,7 @@ services:
     build:
       context: ./client
     ports:
-      - "3000:80" # Frontend runs on port 80 inside the container, mapped to 3000
-
-  mongo:
-    image: mongo:6.0
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+      - "3000:80"
 
 volumes:
   mongo_data:

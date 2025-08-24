@@ -16,10 +16,9 @@ connectDB();
 const app = express();
 
 // Enable CORS with your frontend
-app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN || 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(cors());
+
+
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
