@@ -6,9 +6,6 @@ import { useContext } from 'react';
 import { AuthContext } from './contexts/AuthContext';
 import { DocumentProvider } from './contexts/DocumentContext';
 
-// Components
-import InactivityHandler from './components/InactivityHandler';
-
 // Pages
 import RootLayout from './pages/RootLayout';
 import LandingPage from './pages/LandingPage';
@@ -25,15 +22,11 @@ function AppRoutes() {
 
   const router = createBrowserRouter([
     {
-      element: (
-        <InactivityHandler>
-          <RootLayout />
-        </InactivityHandler>
-      ),
+      element: <RootLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { path: '/', element: <SlideShow /> }, 
-        { path: '/landing', element: <LandingPage /> }, 
+        { path: '/', element: <SlideShow /> },
+        { path: '/landing', element: <LandingPage /> },
         { path: '/map', element: <MapPage /> },
         { path: '/register', element: loggedIn ? <Navigate to="/map" /> : <RegisterPage /> },
         { path: '/login', element: loggedIn ? <Navigate to="/map" /> : <LoginPage /> },
