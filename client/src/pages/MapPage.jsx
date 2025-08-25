@@ -51,7 +51,7 @@ function MapPage() {
 useEffect(() => {
   const timer = setTimeout(() => {
     navigate('/'); // redirect back to main page after 10s
-  }, 10000);
+  }, 60000);
 
   return () => clearTimeout(timer); // cleanup if user leaves earlier
 }, [navigate]);
