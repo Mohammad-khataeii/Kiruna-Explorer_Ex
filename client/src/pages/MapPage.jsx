@@ -1,4 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { FaArrowsAltV } from 'react-icons/fa';
 import MapComponent from '../components/Map';
 import Diagram from "../components/Diagram";
@@ -43,6 +45,17 @@ function MapPage() {
     const handleDoubleClick = () => {
         setDiagramHeight(maxHeight); // Expand
     };
+
+    const navigate = useNavigate();
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    navigate('/'); // redirect back to main page after 10s
+  }, 10000);
+
+  return () => clearTimeout(timer); // cleanup if user leaves earlier
+}, [navigate]);
+
 
     return (
         <div
